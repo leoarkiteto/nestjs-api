@@ -1,0 +1,23 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+max_line_length = 80
+tab_width = 4
+trim_trailing_whitespace = true
+
+[*.prisma]
+tab_width = 2
+
+[{*.ats,*.cts,*.mts,*.ts}]
+tab_width = 2
+
+[{*.cjs,*.js}]
+tab_width = 2
+
+[{*.http,*.rest}]
+indent_size = 0
