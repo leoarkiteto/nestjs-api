@@ -11,6 +11,7 @@ import { CreateBookmarkDto, EditBookmarkDto } from "@/bookmark/dto";
 describe("App e2e", () => {
   let app: INestApplication;
   let prisma: PrismaService;
+
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule],
@@ -200,6 +201,24 @@ describe("App e2e", () => {
       });
     });
 
-    describe("Delete bookmark", () => {});
+    describe("Delete bookmark", () => {
+      it("should delete by id ", () => {
+        return pactum
+          .spec()
+          .delete("/bookmarks/{id}")
+          .withPathParams("id", "$S{bookmarkId}")
+          .withHeaders({ Authorization: "Bearer $S{userAt}" })
+          .expectStatus(204);
+      });
+
+      it("should get empty bookmark", () => {
+        return pactum
+          .spec()
+          .get("/bookmarks")
+          .withHeaders({ Authorization: "Bearer $S{userAt}" })
+          .expectStatus(200)
+          .expectJsonLength(0);
+      });
+    });
   });
 });
