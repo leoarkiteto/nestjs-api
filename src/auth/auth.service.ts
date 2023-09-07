@@ -23,6 +23,7 @@ export class AuthService {
           hash,
         },
       });
+
       return this.signToken(user.id, user.email);
     } catch (err) {
       if (err instanceof PrismaClientKnownRequestError) {
@@ -50,7 +51,7 @@ export class AuthService {
     return this.signToken(user.id, user.email);
   }
 
-  async signToken(userId: number, email: string) {
+  private async signToken(userId: number, email: string) {
     const payload = {
       sub: userId,
       email,
